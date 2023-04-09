@@ -10,7 +10,6 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.38.4",
     "@sveltejs/vite-plugin-svelte": "^2.0.3",
     "@tsconfig/svelte": "^3.0.0",
     "@typescript-eslint/parser": "^5.57.1",
