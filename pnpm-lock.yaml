@@ -1,12 +1,17 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@iconify/svelte': ^3.1.1
+  '@popperjs/core': ^2.11.7
   '@sveltejs/vite-plugin-svelte': ^2.0.3
   '@tsconfig/svelte': ^3.0.0
   '@typescript-eslint/parser': ^5.57.1
   autoprefixer: ^10.4.14
+  classnames: ^2.3.2
   eslint: ^8.38.0
   eslint-plugin-svelte: ^2.26.0
+  flowbite: ^1.6.4
+  flowbite-svelte: ^0.34.7
   pocketbase: ^0.13.1
   postcss: ^8.4.21
   prettier: ^2.8.7
@@ -18,9 +23,14 @@ specifiers:
   vite: ^4.2.0
 
 dependencies:
+  '@popperjs/core': 2.11.7
+  classnames: 2.3.2
+  flowbite: 1.6.4
+  flowbite-svelte: 0.34.7_oaktdpvhczali64vppydij2u5y
   pocketbase: 0.13.1
 
 devDependencies:
+  '@iconify/svelte': 3.1.1_svelte@3.58.0
   '@sveltejs/vite-plugin-svelte': 2.0.4_svelte@3.58.0+vite@4.2.1
   '@tsconfig/svelte': 3.0.0
   '@typescript-eslint/parser': 5.57.1_ze6bmax3gcsfve3yrzu6npguhe
@@ -293,6 +303,19 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
+  /@iconify/svelte/3.1.1_svelte@3.58.0:
+    resolution: {integrity: sha512-z9w/Z2ei+nxByWgbGYKDmMxY0TKJtrK/6eZS9N2/eMkzQFQnOwbdcaSJDP4kpAFImY7s/WmE49GLH0zHvs9yPw==}
+    peerDependencies:
+      svelte: '>=3'
+    dependencies:
+      '@iconify/types': 2.0.0
+      svelte: 3.58.0
+    dev: true
+
+  /@iconify/types/2.0.0:
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
+    dev: true
+
   /@jridgewell/gen-mapping/0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
     engines: {node: '>=6.0.0'}
@@ -347,6 +370,10 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
+
+  /@popperjs/core/2.11.7:
+    resolution: {integrity: sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==}
+    dev: false
 
   /@sveltejs/vite-plugin-svelte/2.0.4_svelte@3.58.0+vite@4.2.1:
     resolution: {integrity: sha512-pjqhW00KwK2uzDGEr+yJBwut+D+4XfJO/+bHHdHzPRXn9+1Jeq5JcFHyrUiYaXgHtyhX0RsllCTm4ssAx4ZY7Q==}
@@ -594,6 +621,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /classnames/2.3.2:
+    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
+    dev: false
 
   /color-convert/2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -910,6 +941,28 @@ packages:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
     dev: true
 
+  /flowbite-svelte/0.34.7_oaktdpvhczali64vppydij2u5y:
+    resolution: {integrity: sha512-sgSKGVUrL3niwOJfejc4J4Z546MMNeZ3LGi5G6anVdGd9o0ydekFidXfJa6zrX6EcfCIE4br05FPFq2Q0b21NQ==}
+    engines: {node: '>=16.0.0', npm: '>=7.0.0'}
+    peerDependencies:
+      '@popperjs/core': ^2.11.6
+      classnames: ^2.3.2
+      flowbite: ^1.6.3
+      svelte: ^3.55.1
+    dependencies:
+      '@popperjs/core': 2.11.7
+      classnames: 2.3.2
+      flowbite: 1.6.4
+      svelte: 3.58.0
+    dev: false
+
+  /flowbite/1.6.4:
+    resolution: {integrity: sha512-//kSaigwERCcE3udumadB3+xfOXeN/ZQzcub2qVCHuB7uscB4XIm3yP9R8zL0XsEOnYG2lnroq/dydQZbzvESw==}
+    dependencies:
+      '@popperjs/core': 2.11.7
+      mini-svg-data-uri: 1.4.4
+    dev: false
+
   /fraction.js/4.2.0:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
     dev: true
@@ -1175,6 +1228,11 @@ packages:
     resolution: {integrity: sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==}
     engines: {node: '>=4'}
     dev: true
+
+  /mini-svg-data-uri/1.4.4:
+    resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
+    hasBin: true
+    dev: false
 
   /minimatch/3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
@@ -1717,7 +1775,6 @@ packages:
   /svelte/3.58.0:
     resolution: {integrity: sha512-brIBNNB76mXFmU/Kerm4wFnkskBbluBDCjx/8TcpYRb298Yh2dztS2kQ6bhtjMcvUhd5ynClfwpz5h2gnzdQ1A==}
     engines: {node: '>= 8'}
-    dev: true
 
   /tailwindcss/3.3.1_postcss@8.4.21:
     resolution: {integrity: sha512-Vkiouc41d4CEq0ujXl6oiGFQ7bA3WEhUZdTgXAhtKxSy49OmKs8rEfQmupsfF0IGW8fv2iQkp1EVUuapCFrZ9g==}
