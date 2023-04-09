@@ -1,19 +1,18 @@
 <script lang="ts">
   import { Button } from 'flowbite-svelte'
   import AuthForm from './lib/AuthForm.svelte'
-  import { pb, user } from './lib/pocketbase'
-
-  const logout = () => {
-    pb.authStore.clear()
-  }
+  import { logout, user } from './lib/pocketbase'
+  import AuthHeading from './lib/AuthHeading.svelte'
+  import MenuButton from './lib/Menu.svelte'
 </script>
 
 <main>
   {#if $user}
-    You are logged in
-    <Button on:click={() => logout()}>LOGOUT</Button>
+    <MenuButton />
+    <div class="p-4 flex flex-col justify-center items-center w-screen h-screen bg-slate-200" />
   {:else}
-    <div class="flex justify-center items-center w-screen h-screen bg-slate-200">
+    <div class="p-4 flex flex-col justify-center items-center w-screen h-screen bg-slate-200">
+      <AuthHeading />
       <AuthForm />
     </div>
   {/if}

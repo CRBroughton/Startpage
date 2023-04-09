@@ -22,7 +22,7 @@
   }
 </script>
 
-<form class="m-4 p-6 w-full md:w-96 bg-white rounded-xl" on:submit|preventDefault>
+<form class="p-6 w-full md:w-96 bg-white rounded-xl" on:submit|preventDefault>
   <div class="grid gap-6 mb-6 grid-cols-1">
     <div>
       <Label for="first_name" class="mb-2">Username</Label>
