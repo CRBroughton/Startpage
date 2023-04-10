@@ -7,7 +7,7 @@ export const logout = () => {
     pb.authStore.clear()
 }
 
-const isError = (err: unknown): err is Error => err instanceof Error
+export const isError = (err: unknown): err is Error => err instanceof Error
 
 export const refresh = async () => {
     try {

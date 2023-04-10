@@ -5,6 +5,7 @@
   import MenuButton from './lib/Menu.svelte'
   import Health from './lib/Health.svelte'
   import { onMount } from 'svelte'
+  import Toast from './lib/Toast.svelte'
 
   onMount(() => {
     if (pb.authStore.token) {
@@ -23,5 +24,6 @@
       <AuthHeading />
       <AuthForm />
     </div>
+    <Toast />
   {/if}
 </main>

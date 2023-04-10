@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Input, Label, Button } from 'flowbite-svelte'
-  import { pb } from './pocketbase'
+  import { isError, pb } from './pocketbase'
+  import { counter, showErrorToast } from '../store/Toast'
 
   let create: boolean = false
 
@@ -9,7 +10,13 @@
   let passwordConfirm: string = ''
 
   const login = async () => {
-    await pb.collection('users').authWithPassword(username, password)
+    try {
+      await pb.collection('users').authWithPassword(username, password)
+    } catch (error) {
+      if (isError(error)) {
+        trigger()
+      }
+    }
   }
 
   const createUser = async () => {
@@ -19,6 +26,17 @@
       passwordConfirm
     })
     await login()
+  }
+
+  function trigger() {
+    showErrorToast.set(true)
+    timeout()
+  }
+
+  function timeout() {
+    if (--$counter > 0) return setTimeout(timeout, 1000)
+    showErrorToast.set(false)
+    counter.set(6)
   }
 </script>
 
