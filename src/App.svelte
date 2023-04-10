@@ -6,6 +6,7 @@
   import Health from './lib/Health.svelte'
   import { onMount } from 'svelte'
   import Toast from './lib/Toast.svelte'
+  import Bookmarks from './lib/Bookmarks.svelte'
 
   onMount(() => {
     if (pb.authStore.token) {
@@ -17,7 +18,9 @@
 <main>
   {#if $user}
     <MenuButton />
-    <div class="p-4 flex flex-col justify-center items-center w-screen h-screen bg-slate-200" />
+    <div class="p-4 flex flex-col justify-center items-center w-screen h-screen bg-slate-200">
+      <Bookmarks />
+    </div>
   {:else}
     <div class="p-4 flex flex-col justify-center items-center w-screen h-screen bg-slate-200">
       <AuthHeading />
