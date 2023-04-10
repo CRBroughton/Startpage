@@ -30,7 +30,7 @@
 
   function trigger() {
     showErrorToast.set(true)
-    timeout()
+    if ($counter >= 6) timeout()
   }
 
   function timeout() {
