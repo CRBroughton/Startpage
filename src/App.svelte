@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { Button } from 'flowbite-svelte'
   import AuthForm from './lib/AuthForm.svelte'
-  import { logout, user } from './lib/pocketbase'
+  import { user } from './lib/pocketbase'
   import AuthHeading from './lib/AuthHeading.svelte'
   import MenuButton from './lib/Menu.svelte'
   import Health from './lib/Health.svelte'
