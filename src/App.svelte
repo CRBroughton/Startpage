@@ -1,9 +1,32 @@
 <script lang="ts">
-	import MenuButton from './lib/MenuButton.svelte'
+  import AuthForm from './lib/AuthForm.svelte'
+  import { pb, refresh, user } from './lib/pocketbase'
+  import AuthHeading from './lib/AuthHeading.svelte'
+  import MenuButton from './lib/Menu.svelte'
+  import Health from './lib/Health.svelte'
+  import { onMount } from 'svelte'
+  import Toast from './lib/Toast.svelte'
+  import Bookmarks from './lib/Bookmarks.svelte'
+
+  onMount(() => {
+    if (pb.authStore.token) {
+      refresh()
+    }
+  })
 </script>
 
 <main>
-	<div>
-		<MenuButton />
-	</div>
+  {#if $user}
+    <MenuButton />
+    <div class="p-4 flex flex-col justify-center items-center w-screen h-screen bg-slate-200">
+      <Bookmarks />
+    </div>
+  {:else}
+    <div class="p-4 flex flex-col justify-center items-center w-screen h-screen bg-slate-200">
+      <AuthHeading />
+      <AuthForm />
+    </div>
+    <Toast error="Failed to login" />
+  {/if}
+  <Health />
 </main>
