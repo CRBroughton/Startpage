@@ -1,9 +1,16 @@
 <script lang="ts">
   import AuthForm from './lib/AuthForm.svelte'
-  import { user } from './lib/pocketbase'
+  import { pb, refresh, user } from './lib/pocketbase'
   import AuthHeading from './lib/AuthHeading.svelte'
   import MenuButton from './lib/Menu.svelte'
   import Health from './lib/Health.svelte'
+  import { onMount } from 'svelte'
+
+  onMount(() => {
+    if (pb.authStore.token) {
+      refresh()
+    }
+  })
 </script>
 
 <main>

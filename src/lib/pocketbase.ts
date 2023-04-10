@@ -7,6 +7,19 @@ export const logout = () => {
     pb.authStore.clear()
 }
 
+const isError = (err: unknown): err is Error => err instanceof Error
+
+export const refresh = async () => {
+    try {
+        await pb.collection('users').authRefresh()
+    } catch (error) {
+        if (isError(error)) {
+            logout()
+            console.log(error)
+        }
+    }
+}
+
 export const user = writable(pb.authStore.model)
 
 pb.authStore.onChange(() => {
