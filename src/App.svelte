@@ -16,7 +16,6 @@
 
 <main>
   {#if $user}
-    <Health />
     <MenuButton />
     <div class="p-4 flex flex-col justify-center items-center w-screen h-screen bg-slate-200" />
   {:else}
@@ -24,6 +23,7 @@
       <AuthHeading />
       <AuthForm />
     </div>
-    <Toast />
+    <Toast error="Failed to login" />
   {/if}
+  <Health />
 </main>

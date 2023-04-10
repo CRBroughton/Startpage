@@ -1,7 +1,9 @@
-<script>
+<script lang="ts">
   import { Toast } from 'flowbite-svelte'
   import { fly } from 'svelte/transition'
   import { showErrorToast } from '../store/Toast'
+
+  export let error: string = ''
 </script>
 
 <div class="absolute bottom-3 right-3 flex gap-10">
@@ -21,6 +23,6 @@
       >
       <span class="sr-only">Error icon</span>
     </svelte:fragment>
-    Failed to login
+    {error}
   </Toast>
 </div>
