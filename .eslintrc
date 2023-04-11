@@ -33,5 +33,20 @@
         ]
       }
     }
-  ]
+  ],
+  "rules": {
+    "no-console": "error",
+    "semi": [
+      "warn",
+      "never"
+    ],
+    "no-multiple-empty-lines": [
+      "warn",
+      {
+        "max": 1,
+        "maxBOF": 0,
+        "maxEOF": 0
+      }
+    ]
+  }
 }

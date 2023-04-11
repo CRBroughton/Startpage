@@ -15,6 +15,7 @@ export const refresh = async () => {
     } catch (error) {
         if (isError(error)) {
             logout()
+            // eslint-disable-next-line no-console
             console.log(error)
         }
     }
@@ -25,4 +26,3 @@ export const user = writable(pb.authStore.model)
 pb.authStore.onChange(() => {
     user.set(pb.authStore.model)
 })
-
