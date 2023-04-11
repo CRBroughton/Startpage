@@ -3,14 +3,14 @@
   import { bookmarks, categories, handleResponse } from './pocketbase'
   import { A, P, Toast } from 'flowbite-svelte'
 
-  const filteredCategory = (category: string) =>
+  $: filteredCategory = (category: string) =>
     $bookmarks.filter((bookmark) => bookmark.category === category)
 
   onMount(async () => handleResponse())
 </script>
 
 <div class="grid md:grid-cols-3 gap-2 w-full md:max-w-4xl">
-  {#each $categories as category}
+  {#each $categories.sort() as category}
     <div class="flex flex-col gap-2 w-full">
       <p>{category}</p>
       {#each filteredCategory(category) as bookmark}
