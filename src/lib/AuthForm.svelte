@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Input, Label, Button } from 'flowbite-svelte'
-  import { isError, pb } from './pocketbase'
+  import { isError, pb } from '../store/pocketbase'
   import { counter, showErrorToast } from '../store/Toast'
 
   let create: boolean = false

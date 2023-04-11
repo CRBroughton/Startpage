@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { bookmarks, categories, handleResponse } from './pocketbase'
+  import { bookmarks, categories, handleResponse } from '../store/pocketbase'
   import { A, P, Toast } from 'flowbite-svelte'
 
   $: filteredCategory = (category: string) =>

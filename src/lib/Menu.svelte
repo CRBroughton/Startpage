@@ -1,6 +1,6 @@
 <script lang="ts">
   import { visible } from '../store/CreateBookmark'
-  import { logout } from './pocketbase'
+  import { logout } from '../store/pocketbase'
 
   let open: boolean = false
 </script>

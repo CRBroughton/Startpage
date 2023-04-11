@@ -1,6 +1,6 @@
 <script lang="ts">
   import AuthForm from './lib/AuthForm.svelte'
-  import { pb, refresh, user } from './lib/pocketbase'
+  import { pb, refresh, user } from './store/pocketbase'
   import AuthHeading from './lib/AuthHeading.svelte'
   import MenuButton from './lib/Menu.svelte'
   import Health from './lib/Health.svelte'

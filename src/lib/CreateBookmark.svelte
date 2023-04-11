@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Button, Input } from 'flowbite-svelte'
-  import { handleResponse, pb } from './pocketbase'
+  import { handleResponse, pb } from '../store/pocketbase'
 
   export let visible: boolean = false
   let url: string = ''
