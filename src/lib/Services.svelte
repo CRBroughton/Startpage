@@ -6,9 +6,9 @@
   onMount(async () => await getServices())
 </script>
 
-<div class="absolute top-2 left-2 flex gap-2">
-  {#each $services as service}
-    <A href={service.url}>
+<div class="absolute top-2 px-2 w-full flex gap-2">
+  {#each $services.sort((a, b) => a.value.localeCompare(b.value)) as service}
+    <A class="w-full" href={service.url}>
       <Toast class="min-w-full" simple={true}>
         <P>{service.value}</P>
       </Toast>
