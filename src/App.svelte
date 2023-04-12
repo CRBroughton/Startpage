@@ -9,6 +9,7 @@
   import Bookmarks from './lib/Bookmarks.svelte'
   import CreateBookmark from './lib/CreateBookmark.svelte'
   import { visible } from './store/CreateBookmark'
+  import Services from './lib/Services.svelte'
 
   onMount(() => {
     if (pb.authStore.token) {
@@ -19,6 +20,7 @@
 
 <main>
   {#if $user}
+    <Services />
     <MenuButton />
     <div class="p-4 flex flex-col justify-center items-center w-screen h-screen bg-slate-200">
       <Bookmarks />

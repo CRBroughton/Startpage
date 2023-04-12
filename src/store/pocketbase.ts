@@ -33,8 +33,14 @@ interface Bookmark {
     value: string
 }
 
+interface Service {
+    url: string
+    value: string
+}
+
 export let bookmarks = writable<Bookmark[]>([])
 export let categories = writable<string[]>([])
+export let services = writable<Service[]>([])
 
 export const handleResponse = async () => {
     const response = await pb.collection('bookmarks').getFullList<Bookmark>()
@@ -53,3 +59,10 @@ export const user = writable(pb.authStore.model)
 pb.authStore.onChange(() => {
     user.set(pb.authStore.model)
 })
+
+export const getServices = async () => {
+    const response = await pb.collection('services').getFullList<Service>()
+
+    services.set(response)
+
+}
