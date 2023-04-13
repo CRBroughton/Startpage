@@ -9,6 +9,16 @@ export const logout = () => {
 
 export const isError = (err: unknown): err is Error => err instanceof Error
 
+export const canCreateAccounts = async () => {
+    try {
+        const test = await pb.collection('flags').getFullList()
+        return test[0].canCreateAccounts
+    } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log(error)
+    }
+}
+
 export const refresh = async () => {
     try {
         await pb.collection('users').authRefresh()

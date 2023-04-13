@@ -1,13 +1,17 @@
 <script lang="ts">
   import { Input, Label, Button } from 'flowbite-svelte'
-  import { isError, pb } from '../store/pocketbase'
+  import { canCreateAccounts, isError, pb } from '../store/pocketbase'
   import { counter, showErrorToast } from '../store/Toast'
+  import { onMount } from 'svelte'
 
   let create: boolean = false
 
   let username: string = ''
   let password: string = ''
   let passwordConfirm: string = ''
+  let canCreateAccount: boolean = false
+
+  onMount(async () => (canCreateAccount = await canCreateAccounts()))
 
   const login = async () => {
     try {
@@ -20,6 +24,7 @@
   }
 
   const createUser = async () => {
+    if (!canCreateAccount) return
     await pb.collection('users').create({
       username,
       password,
@@ -70,7 +75,9 @@
     {/if}
     {#if !create}
       <Button type="submit" on:click={() => login()}>Login</Button>
-      <Button on:click={() => (create = true)}>Create new user</Button>
+      {#if canCreateAccount}
+        <Button on:click={() => (create = true)}>Create new user</Button>
+      {/if}
     {:else}
       <Button on:click={() => createUser()}>Create account</Button>
       <Button on:click={() => (create = false)}>Back</Button>
