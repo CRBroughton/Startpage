@@ -1,5 +1,6 @@
 import PocketBase from 'pocketbase'
 import { get, writable } from 'svelte/store'
+import type { BookmarksRecord, ServicesRecord } from '../pocketbase-types'
 
 export const pb = new PocketBase('http://127.0.0.1:8090')
 
@@ -30,30 +31,12 @@ export const refresh = async () => {
         }
     }
 }
-
-interface Bookmark {
-    category: string
-    collectionId: string
-    collectionName: string
-    created: string | Date
-    id: string
-    owner: string
-    updated: string | Date
-    url: string
-    value: string
-}
-
-interface Service {
-    url: string
-    value: string
-}
-
-export let bookmarks = writable<Bookmark[]>([])
+export let bookmarks = writable<BookmarksRecord[]>([])
 export let categories = writable<string[]>([])
-export let services = writable<Service[]>([])
+export let services = writable<ServicesRecord[]>([])
 
 export const handleResponse = async () => {
-    const response = await pb.collection('bookmarks').getFullList<Bookmark>()
+    const response = await pb.collection('bookmarks').getFullList<BookmarksRecord>()
 
     bookmarks.set(response.sort((a, b) => a.value.localeCompare(b.value)))
 
@@ -71,7 +54,7 @@ pb.authStore.onChange(() => {
 })
 
 export const getServices = async () => {
-    const response = await pb.collection('services').getFullList<Service>()
+    const response = await pb.collection('services').getFullList<ServicesRecord>()
 
     services.set(response)
 
