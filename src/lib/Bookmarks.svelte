@@ -1,12 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { bookmarks, categories, handleResponse } from '../store/pocketbase'
+  import { bookmarks, categories, usePocketBase } from '../store/pocketbase'
   import { A, P, Toast } from 'flowbite-svelte'
+
+  const { getBookmarks } = usePocketBase()
 
   $: filteredCategory = (category: string) =>
     $bookmarks.filter((bookmark) => bookmark.category === category)
 
-  onMount(async () => handleResponse())
+  onMount(async () => getBookmarks())
 </script>
 
 <div class="grid md:grid-cols-3 gap-2 w-full md:max-w-4xl">

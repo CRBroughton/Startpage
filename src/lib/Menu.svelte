@@ -1,7 +1,9 @@
 <script lang="ts">
   import { get } from 'svelte/store'
   import { visible } from '../store/CreateBookmark'
-  import { logout, user } from '../store/pocketbase'
+  import { usePocketBase } from '../store/pocketbase'
+
+  const { user, logout } = usePocketBase()
 
   let open: boolean = false
 </script>

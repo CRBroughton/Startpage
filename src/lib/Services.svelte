@@ -1,7 +1,9 @@
 <script>
   import { onMount } from 'svelte'
-  import { getServices, services } from '../store/pocketbase'
+  import { usePocketBase, services } from '../store/pocketbase'
   import { A, Toast, P } from 'flowbite-svelte'
+
+  const { getServices } = usePocketBase()
 
   onMount(async () => await getServices())
 </script>

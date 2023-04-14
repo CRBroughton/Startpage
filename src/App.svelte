@@ -1,6 +1,6 @@
 <script lang="ts">
   import AuthForm from './lib/AuthForm.svelte'
-  import { canCreateAccounts, pb, refresh, user } from './store/pocketbase'
+  import { usePocketBase } from './store/pocketbase'
   import AuthHeading from './lib/AuthHeading.svelte'
   import MenuButton from './lib/Menu.svelte'
   import Health from './lib/Health.svelte'
@@ -10,6 +10,8 @@
   import CreateBookmark from './lib/CreateBookmark.svelte'
   import { visible } from './store/CreateBookmark'
   import Services from './lib/Services.svelte'
+
+  const { pb, user, refresh } = usePocketBase()
 
   onMount(() => {
     if (pb.authStore.token) {

@@ -1,6 +1,8 @@
 <script lang="ts">
   import { Button, Input } from 'flowbite-svelte'
-  import { handleResponse, pb } from '../store/pocketbase'
+  import { usePocketBase } from '../store/pocketbase'
+
+  const { pb, getBookmarks } = usePocketBase()
 
   export let visible: boolean = false
   let url: string = ''
@@ -21,7 +23,7 @@
     description = ''
     category = ''
 
-    await handleResponse()
+    await getBookmarks()
   }
 </script>
 

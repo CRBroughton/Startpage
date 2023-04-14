@@ -1,27 +1,15 @@
 <script lang="ts">
   import { Input, Label, Button } from 'flowbite-svelte'
-  import { canCreateAccounts, isError, pb } from '../store/pocketbase'
+  import { usePocketBase, password, username, passwordConfirm } from '../store/pocketbase'
   import { counter, showErrorToast } from '../store/Toast'
   import { onMount } from 'svelte'
 
-  let create: boolean = false
+  const { pb, login, canCreateAccounts } = usePocketBase()
 
-  let username: string = ''
-  let password: string = ''
-  let passwordConfirm: string = ''
+  let create: boolean = false
   let canCreateAccount: boolean = false
 
   onMount(async () => (canCreateAccount = await canCreateAccounts()))
-
-  const login = async () => {
-    try {
-      await pb.collection('users').authWithPassword(username, password)
-    } catch (error) {
-      if (isError(error)) {
-        trigger()
-      }
-    }
-  }
 
   const createUser = async () => {
     if (!canCreateAccount) return
@@ -30,7 +18,7 @@
       password,
       passwordConfirm
     })
-    await login()
+    await login(() => trigger())
   }
 
   function trigger() {
@@ -50,7 +38,7 @@
     <div>
       <Label for="first_name" class="mb-2">Username</Label>
       <Input
-        bind:value={username}
+        bind:value={$username}
         type="text"
         id="first_name"
         placeholder="Your username..."
@@ -59,13 +47,19 @@
     </div>
     <div class="mb-6">
       <Label for="password" class="mb-2">Password</Label>
-      <Input bind:value={password} type="password" id="password" placeholder="•••••••••" required />
+      <Input
+        bind:value={$password}
+        type="password"
+        id="password"
+        placeholder="•••••••••"
+        required
+      />
     </div>
     {#if create}
       <div class="mb-6">
         <Label for="confirm_password" class="mb-2">Confirm password</Label>
         <Input
-          bind:value={passwordConfirm}
+          bind:value={$passwordConfirm}
           type="password"
           id="confirm_password"
           placeholder="•••••••••"
@@ -74,7 +68,7 @@
       </div>
     {/if}
     {#if !create}
-      <Button type="submit" on:click={() => login()}>Login</Button>
+      <Button type="submit" on:click={() => login(() => trigger())}>Login</Button>
       {#if canCreateAccount}
         <Button on:click={() => (create = true)}>Create new user</Button>
       {/if}

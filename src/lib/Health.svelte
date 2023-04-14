@@ -1,8 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { pb } from '../store/pocketbase'
+  import { usePocketBase } from '../store/pocketbase'
   import { Indicator } from 'flowbite-svelte'
   import { writable } from 'svelte/store'
+
+  const { pb } = usePocketBase()
 
   interface healthCheckResponse {
     code: number
