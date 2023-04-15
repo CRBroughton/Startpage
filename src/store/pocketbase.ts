@@ -73,22 +73,31 @@ export const usePocketBase = () => {
     }
 
     const getBookmarks = async () => {
-        const response = await pb.collection('bookmarks').getFullList<BookmarksRecord>()
+        try {
+            const response = await pb.collection('bookmarks').getFullList<BookmarksRecord>()
 
-        bookmarks.set(response.sort((a, b) => a.value.localeCompare(b.value)))
+            bookmarks.set(response.sort((a, b) => a.value.localeCompare(b.value)))
 
-        response.forEach((bookmark) => {
-            if (get(categories).includes(bookmark.category)) return
-            categories.update((state) => [...state, bookmark.category])
-        })
-
+            response.forEach((bookmark) => {
+                if (get(categories).includes(bookmark.category)) return
+                categories.update((state) => [...state, bookmark.category])
+            })
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(error)
+        }
     }
 
     const getServices = async () => {
-        const response = await pb.collection('services').getFullList<ServicesRecord>()
+        try {
+            const response = await pb.collection('services').getFullList<ServicesRecord>()
 
-        services.set(response)
+            services.set(response)
 
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(error)
+        }
     }
 
     return {
