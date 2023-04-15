@@ -17,7 +17,7 @@ export let password = writable<string>('')
 export let passwordConfirm = writable<string>('')
 export let health = writable<Partial<healthCheckResponse>>({})
 
-const pb = new PocketBase('http://127.0.0.1:8090')
+const pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL)
 
 const user = writable(pb.authStore.model)
 
