@@ -1,37 +1,27 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { pb } from './pocketbase'
-  import { Card } from 'flowbite-svelte'
+  import { bookmarks, categories, usePocketBase } from '../store/pocketbase'
+  import { A, P, Toast } from 'flowbite-svelte'
 
-  interface Bookmark {
-    category: string
-    collectionId: string
-    collectionName: string
-    created: string | Date
-    id: string
-    owner: string
-    updated: string | Date
-    url: string
-    value: string
-  }
+  const { getBookmarks } = usePocketBase()
 
-  let bookmarks: Bookmark[] = []
+  $: filteredCategory = (category: string) =>
+    $bookmarks.filter((bookmark) => bookmark.category === category)
 
-  const handleResponse = async () => {
-    const response = await pb.collection('bookmarks').getFullList<Bookmark>()
-
-    bookmarks = response
-  }
-
-  onMount(async () => handleResponse())
+  onMount(async () => getBookmarks())
 </script>
 
-<div class="flex flex-col gap-2">
-  {#each bookmarks as bookmark}
-    <Card href={bookmark.url}>
-      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        {bookmark.value}
-      </h5>
-    </Card>
+<div class="grid md:grid-cols-3 gap-2 w-full md:max-w-4xl">
+  {#each $categories.sort() as category}
+    <div class="flex flex-col gap-2 w-full">
+      <p>{category}</p>
+      {#each filteredCategory(category) as bookmark}
+        <A href={bookmark.url}>
+          <Toast class="min-w-full" simple={true}>
+            <P>{bookmark.value}</P>
+          </Toast>
+        </A>
+      {/each}
+    </div>
   {/each}
 </div>

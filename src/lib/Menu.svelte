@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { logout } from './pocketbase'
+  import { get } from 'svelte/store'
+  import { visible } from '../store/CreateBookmark'
+  import { usePocketBase } from '../store/pocketbase'
+
+  const { user, logout } = usePocketBase()
 
   let open: boolean = false
 </script>
-
-<!-- content here -->
 
 <div class="fixed bottom-6 right-6 group">
   <div id="speed-dial-menu-text-outside-button-square" class="flex flex-col items-center space-y-2">
@@ -27,6 +29,7 @@
     {/if}
     {#if open}
       <button
+        on:click={() => visible.set(!$visible)}
         type="button"
         class="relative w-[52px] h-[52px] text-gray-500 bg-white rounded-full border border-gray-200 dark:border-gray-600 hover:text-gray-900 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
       >
@@ -43,24 +46,26 @@
           >Create</span
         >
       </button>
-      <button
-        type="button"
-        class="relative w-[52px] h-[52px] text-gray-500 bg-white rounded-full border border-gray-200 dark:border-gray-600 hover:text-gray-900 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
-      >
-        <svg
-          aria-hidden="true"
-          class="w-6 h-6 mx-auto mt-px"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
+      {#if get(user).canCreateServices}
+        <button
+          type="button"
+          class="relative w-[52px] h-[52px] text-gray-500 bg-white rounded-full border border-gray-200 dark:border-gray-600 hover:text-gray-900 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
         >
-          <path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-        <span
-          class="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-[104px] top-1/2"
-          >Create service</span
-        >
-      </button>
+          <svg
+            aria-hidden="true"
+            class="w-6 h-6 mx-auto mt-px"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span
+            class="absolute block mb-px text-sm font-medium -translate-y-1/2 -left-[104px] top-1/2"
+            >Create service</span
+          >
+        </button>
+      {/if}
       <button
         on:click={() => logout()}
         type="button"
