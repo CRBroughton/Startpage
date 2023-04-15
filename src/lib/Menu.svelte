@@ -8,8 +8,6 @@
   let open: boolean = false
 </script>
 
-<!-- content here -->
-
 <div class="fixed bottom-6 right-6 group">
   <div id="speed-dial-menu-text-outside-button-square" class="flex flex-col items-center space-y-2">
     {#if !open}
