@@ -20,11 +20,11 @@
   })
 </script>
 
-<main>
+<main class="w-screen h-screen bg-slate-200">
   {#if $user}
     <Services />
     <MenuButton />
-    <div class="p-4 flex flex-col justify-center items-center w-screen h-screen bg-slate-200">
+    <div class="p-4 flex flex-col justify-center items-center w-full h-full bg-slate-200">
       <Bookmarks />
       <CreateBookmark visible={$visible} />
     </div>

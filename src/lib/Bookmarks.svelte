@@ -11,7 +11,7 @@
   onMount(async () => getBookmarks())
 </script>
 
-<div class="grid md:grid-cols-3 gap-2 w-full md:max-w-4xl">
+<div class="grid md:grid-cols-3 gap-2 w-screen md:max-w-7xl h-3/4 p-2 overflow-auto">
   {#each $categories.sort() as category}
     <div class="flex flex-col gap-2 w-full">
       <p>{category}</p>

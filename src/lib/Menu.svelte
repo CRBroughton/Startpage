@@ -8,7 +8,7 @@
   let open: boolean = false
 </script>
 
-<div class="fixed bottom-6 right-6 group">
+<div class="fixed bottom-3 right-3 group">
   <div id="speed-dial-menu-text-outside-button-square" class="flex flex-col items-center space-y-2">
     {#if !open}
       <button
