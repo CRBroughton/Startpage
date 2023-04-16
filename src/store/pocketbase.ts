@@ -9,7 +9,11 @@ interface healthCheckResponse {
     message: string
 }
 
-export let bookmarks = writable<BookmarksRecord[]>([])
+interface Bookmark extends BookmarksRecord {
+    id: string
+}
+
+export let bookmarks = writable<Bookmark[]>([])
 export let categories = writable<string[]>([])
 export let services = writable<ServicesRecord[]>([])
 export let username = writable<string>('')
@@ -82,14 +86,26 @@ export const usePocketBase = () => {
 
     const getBookmarks = async () => {
         try {
-            const response = await pb.collection('bookmarks').getFullList<BookmarksRecord>()
+            const response = await pb.collection('bookmarks').getFullList<Bookmark>()
 
             bookmarks.set(response.sort((a, b) => a.value.localeCompare(b.value)))
+
+            categories.set([])
 
             response.forEach((bookmark) => {
                 if (get(categories).includes(bookmark.category)) return
                 categories.update((state) => [...state, bookmark.category])
             })
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(error)
+        }
+    }
+
+    const deleteBookmark = async (id: string) => {
+        try {
+            await pb.collection('bookmarks').delete(id)
+            await getBookmarks()
         } catch (error) {
             // eslint-disable-next-line no-console
             console.log(error)
@@ -117,6 +133,7 @@ export const usePocketBase = () => {
         refresh,
         canCreateAccounts,
         getBookmarks,
+        deleteBookmark,
         getServices
     }
 }
