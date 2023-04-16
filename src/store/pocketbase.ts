@@ -27,6 +27,12 @@ export const usePocketBase = () => {
         user.set(pb.authStore.model)
     })
 
+    const clearUserAuth = () => {
+        username.set('')
+        password.set('')
+        passwordConfirm.set('')
+    }
+
     const getHealth = async () => {
         try {
             const response = await pb.health.check()
@@ -38,11 +44,13 @@ export const usePocketBase = () => {
 
     const logout = () => {
         pb.authStore.clear()
+        clearUserAuth()
     }
 
     const login = async (callback: () => void) => {
         try {
             await pb.collection('users').authWithPassword(get(username), get(password))
+            clearUserAuth()
         } catch (error) {
             if (isError(error)) {
                 callback()
