@@ -19,7 +19,7 @@
         <div>
           <Toast class="min-w-full" simple={true}>
             <div class="flex items-center">
-              <A hhref={bookmark.url}>
+              <A href={bookmark.url}>
                 <P>{bookmark.value}</P>
               </A>
               <Button
