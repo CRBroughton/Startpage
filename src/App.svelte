@@ -18,7 +18,9 @@
 
   const { pb, user, refresh, setUserPreferences } = usePocketBase()
 
-  let color = new Color(get(user).bgColour || '#ffffff')
+  let bgColour: string = get(user) ? get(user).bgColour : '#ffffff'
+
+  let color = new Color(bgColour)
 
   $: useBackgroundColour = color.toHex8String()
 
