@@ -1,6 +1,6 @@
 import PocketBase from 'pocketbase'
 import { get, writable } from 'svelte/store'
-import type { BookmarksRecord, FlagsRecord, ServicesRecord } from '../pocketbase-types'
+import type { BookmarksRecord, FlagsRecord, ServicesRecord, UsersRecord } from '../pocketbase-types'
 
 export const isError = (err: unknown): err is Error => err instanceof Error
 
@@ -124,6 +124,16 @@ export const usePocketBase = () => {
         }
     }
 
+    const setUserPreferences = async (bgColour: string) => {
+        try {
+            await pb.collection('users').update<UsersRecord>(get(user).id, {
+                bgColour
+            })
+        } catch (error) {
+
+        }
+    }
+
     return {
         pb,
         user,
@@ -134,6 +144,7 @@ export const usePocketBase = () => {
         canCreateAccounts,
         getBookmarks,
         deleteBookmark,
-        getServices
+        getServices,
+        setUserPreferences
     }
 }

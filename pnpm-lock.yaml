@@ -8,6 +8,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.57.1
   autoprefixer: ^10.4.14
   classnames: ^2.3.2
+  color-picker-svelte: ^1.1.1
   eslint: ^8.38.0
   eslint-plugin-svelte: ^2.26.0
   flowbite: ^1.6.4
@@ -36,6 +37,7 @@ devDependencies:
   '@tsconfig/svelte': 3.0.0
   '@typescript-eslint/parser': 5.57.1_ze6bmax3gcsfve3yrzu6npguhe
   autoprefixer: 10.4.14_postcss@8.4.21
+  color-picker-svelte: 1.1.1
   eslint: 8.38.0
   eslint-plugin-svelte: 2.26.0_a4ckjr7darsrglbip3svgxgxc4
   pocketbase-typegen: 1.1.7
@@ -49,6 +51,11 @@ devDependencies:
   vite: 4.2.1
 
 packages:
+
+  /@ctrl/tinycolor/3.6.0:
+    resolution: {integrity: sha512-/Z3l6pXthq0JvMYdUFyX9j0MaCltlIn6mfh9jLyQwg5aPKxkyNa0PTHtU1AlFXLNk55ZuAeJRcpvq+tmLfKmaQ==}
+    engines: {node: '>=10'}
+    dev: true
 
   /@esbuild/android-arm/0.17.15:
     resolution: {integrity: sha512-sRSOVlLawAktpMvDyJIkdLI/c/kdRTOqo8t6ImVxg8yT7LQDUYV5Rp2FKeEosLr6ZCja9UjYAzyRSxGteSJPYg==}
@@ -781,6 +788,12 @@ packages:
 
   /color-name/1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+    dev: true
+
+  /color-picker-svelte/1.1.1:
+    resolution: {integrity: sha512-4liblSq0B+jVQa2ZW4aPxq5ykKV9nAnG7AuhmLnho+3rC7Hm5TCtRI9gIF6irEThGsSSYkDTxzTSorZsba1Fxg==}
+    dependencies:
+      '@ctrl/tinycolor': 3.6.0
     dev: true
 
   /color-support/1.1.3:
