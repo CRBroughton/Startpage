@@ -2,16 +2,27 @@
   import { onMount } from 'svelte'
   import { bookmarks, categories, usePocketBase } from '../store/pocketbase'
   import { A, Button, P, Toast } from 'flowbite-svelte'
+  import DeleteModal from './DeleteModal.svelte'
+  import { deleteModalVisible } from '../store/DeleteModal'
 
-  const { getBookmarks, deleteBookmark } = usePocketBase()
+  const { getBookmarks } = usePocketBase()
 
   $: filteredCategory = (category: string) =>
     $bookmarks.filter((bookmark) => bookmark.category === category)
+
+  let bookmarkModalID: string = ''
+
+  const showDeleteModal = (id: string) => {
+    $deleteModalVisible = !$deleteModalVisible
+    bookmarkModalID = id
+  }
 
   onMount(async () => getBookmarks())
 </script>
 
 <div class="grid md:grid-cols-3 gap-2 w-screen md:max-w-7xl h-3/4 p-2 overflow-auto">
+  <DeleteModal id={bookmarkModalID} />
+  <div class="absolute top-1/2" />
   {#each $categories.sort() as category}
     <div class="flex flex-col gap-2 w-full">
       <p>{category}</p>
@@ -26,7 +37,7 @@
                 outline={true}
                 color="light"
                 class="!p-2 ml-auto"
-                on:click={() => deleteBookmark(bookmark.id)}
+                on:click={() => showDeleteModal(bookmark.id)}
               >
                 <svg
                   class="w-5 h-5"
