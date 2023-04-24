@@ -19,7 +19,7 @@
   const { pb, user, refresh, setUserPreferences } = usePocketBase()
 
   let bgColour: string = get(user) ? get(user).bgColour : '#e2e8f0'
-  let buttonColour: string = get(user) ? get(user).buttonColour : '#e2e8f0'
+  let buttonColour: string = get(user) ? get(user).buttonColour : '#f2f0f0'
 
   let color = new Color(bgColour)
   let bookmarkColour = new Color(buttonColour)
