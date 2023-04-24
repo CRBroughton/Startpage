@@ -7,6 +7,8 @@
 
   const { getBookmarks } = usePocketBase()
 
+  export let bgColour: string = ''
+
   $: filteredCategory = (category: string) =>
     $bookmarks.filter((bookmark) => bookmark.category === category)
 
@@ -20,7 +22,7 @@
   onMount(async () => getBookmarks())
 </script>
 
-<div class="grid md:grid-cols-3 gap-2 w-screen md:max-w-7xl h-3/4 p-2 overflow-auto">
+<div class="grid md:grid-cols-3 gap-2 w-screen md:max-w-7xl md:h-3/4 p-2 overflow-auto">
   <DeleteModal id={bookmarkModalID} />
   <div class="absolute top-1/2" />
   {#each $categories.sort() as category}
@@ -28,7 +30,7 @@
       <p>{category}</p>
       {#each filteredCategory(category) as bookmark}
         <div>
-          <Toast class="min-w-full" simple={true}>
+          <Toast class="min-w-full" style="background-color: {bgColour}" simple={true}>
             <div class="flex items-center">
               <A href={bookmark.url}>
                 <P>{bookmark.value}</P>

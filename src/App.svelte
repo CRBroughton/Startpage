@@ -14,15 +14,18 @@
   import { userMenuVisible } from './store/UserMenu'
   import { Color, ColorInput } from 'color-picker-svelte'
   import { get } from 'svelte/store'
-  import { Button } from 'flowbite-svelte'
+  import { Button, P } from 'flowbite-svelte'
 
   const { pb, user, refresh, setUserPreferences } = usePocketBase()
 
   let bgColour: string = get(user) ? get(user).bgColour : '#e2e8f0'
+  let buttonColour: string = get(user) ? get(user).buttonColour : '#e2e8f0'
 
   let color = new Color(bgColour)
+  let bookmarkColour = new Color(buttonColour)
 
   $: useBackgroundColour = color.toHex8String()
+  $: useBookmarkBgColour = bookmarkColour.toHex8String()
 
   onMount(() => {
     if (pb.authStore.token) {
@@ -35,9 +38,20 @@
   {#if $user}
     {#if $userMenuVisible}
       <UserMenu>
-        <ColorInput bind:color title="BG Colour" />
+        <div class="grid grid-flow-row md:grid-cols-2 gap-2 items-center">
+          <P>Background Colour:</P>
+          <ColorInput bind:color title="BG Colour" />
+          <P>Bookmark Colour:</P>
+          <ColorInput bind:color={bookmarkColour} title="BG Colour" />
+        </div>
         <div slot="footer">
-          <Button on:click={() => setUserPreferences(useBackgroundColour)}>Save</Button>
+          <Button
+            on:click={() =>
+              setUserPreferences({
+                bg: useBackgroundColour,
+                buttonBg: useBookmarkBgColour
+              })}>Save</Button
+          >
         </div>
       </UserMenu>
     {/if}
@@ -48,7 +62,7 @@
       class="p-4 flex flex-col justify-center items-center w-full h-full"
       style="background-color: {useBackgroundColour}"
     >
-      <Bookmarks />
+      <Bookmarks bgColour={useBookmarkBgColour} />
       <CreateBookmark visible={$visible} />
     </div>
   {:else}

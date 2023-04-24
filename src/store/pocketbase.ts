@@ -124,10 +124,16 @@ export const usePocketBase = () => {
         }
     }
 
-    const setUserPreferences = async (bgColour: string) => {
+    interface UserPreferencesProps {
+        bg: string
+        buttonBg: string
+    }
+
+    const setUserPreferences = async (props: UserPreferencesProps) => {
         try {
             await pb.collection('users').update<UsersRecord>(get(user).id, {
-                bgColour
+                bgColour: props.bg,
+                buttonColour: props.buttonBg
             })
         } catch (error) {
 

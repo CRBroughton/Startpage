@@ -55,6 +55,7 @@ export type UsersRecord = {
 	avatar?: string
 	canCreateServices?: boolean
 	bgColour?: string
+	buttonColour?: string
 }
 
 // Response types include system fields and match responses from the PocketBase API
