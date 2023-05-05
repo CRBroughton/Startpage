@@ -56,6 +56,7 @@ export type UsersRecord = {
 	canCreateServices?: boolean
 	bgColour?: string
 	buttonColour?: string
+	textColour?: string
 }
 
 // Response types include system fields and match responses from the PocketBase API

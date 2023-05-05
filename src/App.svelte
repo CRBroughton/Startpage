@@ -18,14 +18,13 @@
 
   const { pb, user, refresh, setUserPreferences } = usePocketBase()
 
-  let bgColour: string = get(user) ? get(user).bgColour : '#e2e8f0'
-  let buttonColour: string = get(user) ? get(user).buttonColour : '#f2f0f0'
-
-  let color = new Color(bgColour)
-  let bookmarkColour = new Color(buttonColour)
+  let color = new Color(get(user) ? get(user).bgColour : '#e2e8f0')
+  let bookmarkColour = new Color(get(user) ? get(user).buttonColour : '#f2f0f0')
+  let textColour = new Color(get(user) ? get(user).textColour : '#3b3b3b')
 
   $: useBackgroundColour = color.toHex8String()
   $: useBookmarkBgColour = bookmarkColour.toHex8String()
+  $: useTextColour = textColour.toHex8String()
 
   onMount(() => {
     if (pb.authStore.token) {
@@ -43,13 +42,16 @@
           <ColorInput bind:color title="BG Colour" />
           <P>Bookmark Colour:</P>
           <ColorInput bind:color={bookmarkColour} title="BG Colour" />
+          <P>Text Colour:</P>
+          <ColorInput bind:color={textColour} title="Text Colour" />
         </div>
         <div slot="footer">
           <Button
             on:click={() =>
               setUserPreferences({
                 bg: useBackgroundColour,
-                buttonBg: useBookmarkBgColour
+                buttonBg: useBookmarkBgColour,
+                textColour: useTextColour,
               })}>Save</Button
           >
         </div>
@@ -62,7 +64,7 @@
       class="p-4 flex flex-col justify-center items-center w-full h-full"
       style="background-color: {useBackgroundColour}"
     >
-      <Bookmarks bgColour={useBookmarkBgColour} />
+      <Bookmarks bgColour={useBookmarkBgColour} textColour={useTextColour} />
       <CreateBookmark visible={$visible} />
     </div>
   {:else}

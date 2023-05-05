@@ -127,13 +127,15 @@ export const usePocketBase = () => {
     interface UserPreferencesProps {
         bg: string
         buttonBg: string
+        textColour: string
     }
 
     const setUserPreferences = async (props: UserPreferencesProps) => {
         try {
             await pb.collection('users').update<UsersRecord>(get(user).id, {
                 bgColour: props.bg,
-                buttonColour: props.buttonBg
+                buttonColour: props.buttonBg,
+                textColour: props.textColour,
             })
         } catch (error) {
 

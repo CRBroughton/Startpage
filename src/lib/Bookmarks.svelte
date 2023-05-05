@@ -8,6 +8,7 @@
   const { getBookmarks } = usePocketBase()
 
   export let bgColour: string = ''
+  export let textColour: string = ''
 
   $: filteredCategory = (category: string) =>
     $bookmarks.filter((bookmark) => bookmark.category === category)
@@ -27,13 +28,13 @@
   <div class="absolute top-1/2" />
   {#each $categories.sort() as category}
     <div class="flex flex-col gap-2 w-full">
-      <p>{category}</p>
+      <p style="color: {textColour}">{category}</p>
       {#each filteredCategory(category) as bookmark}
         <div>
           <Toast class="min-w-full" style="background-color: {bgColour}" simple={true}>
             <div class="flex items-center">
               <A href={bookmark.url}>
-                <P>{bookmark.value}</P>
+                <P style="color: {textColour}">{bookmark.value}</P>
               </A>
               <Button
                 outline={true}
