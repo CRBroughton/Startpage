@@ -1,20 +1,20 @@
 <script lang="ts">
-  import AuthForm from './lib/AuthForm.svelte'
+  import {
+    AuthForm,
+    AuthHeading,
+    Bookmarks,
+    CreateBookmark,
+    Health,
+    Services,
+    UserMenu
+  } from './lib/index'
   import { usePocketBase } from './store/pocketbase'
-  import AuthHeading from './lib/AuthHeading.svelte'
-  import MenuButton from './lib/Menu.svelte'
-  import Health from './lib/Health.svelte'
   import { onMount } from 'svelte'
-  import Toast from './lib/Toast.svelte'
-  import Bookmarks from './lib/Bookmarks.svelte'
-  import CreateBookmark from './lib/CreateBookmark.svelte'
   import { visible } from './store/CreateBookmark'
-  import Services from './lib/Services.svelte'
-  import UserMenu from './lib/UserMenu.svelte'
   import { userMenuVisible } from './store/UserMenu'
   import { Color, ColorInput } from 'color-picker-svelte'
   import { get } from 'svelte/store'
-  import { Button, P } from 'flowbite-svelte'
+  import { Button, MenuButton, P, Toast } from 'flowbite-svelte'
 
   const { pb, user, refresh, setUserPreferences } = usePocketBase()
 
