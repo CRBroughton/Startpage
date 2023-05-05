@@ -30,7 +30,8 @@
             "maxBOF": 0,
             "maxEOF": 0
           }
-        ]
+        ],
+        "no-trailing-spaces": ["warn"]
       }
     }
   ],
@@ -47,6 +48,7 @@
         "maxBOF": 0,
         "maxEOF": 0
       }
-    ]
+    ],
+    "no-trailing-spaces": "warn"
   }
 }
