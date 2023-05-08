@@ -6,7 +6,9 @@
     CreateBookmark,
     Health,
     Services,
-    UserMenu
+    UserMenu,
+    Toast,
+    Menu as MenuButton
   } from './lib/index'
   import { usePocketBase } from './store/pocketbase'
   import { onMount } from 'svelte'
@@ -14,7 +16,7 @@
   import { userMenuVisible } from './store/UserMenu'
   import { Color, ColorInput } from 'color-picker-svelte'
   import { get } from 'svelte/store'
-  import { Button, MenuButton, P, Toast } from 'flowbite-svelte'
+  import { Button, P } from 'flowbite-svelte'
 
   const { pb, user, refresh, setUserPreferences } = usePocketBase()
 
