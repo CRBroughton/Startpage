@@ -41,9 +41,9 @@
       <UserMenu>
         <div class="grid grid-flow-row md:grid-cols-2 gap-2 items-center">
           <P>Background Colour:</P>
-          <ColorInput bind:color title="BG Colour" />
+          <ColorInput bind:color title="Background Colour" />
           <P>Bookmark Colour:</P>
-          <ColorInput bind:color={bookmarkColour} title="BG Colour" />
+          <ColorInput bind:color={bookmarkColour} title="Bookmark Colour" />
           <P>Text Colour:</P>
           <ColorInput bind:color={textColour} title="Text Colour" />
         </div>
