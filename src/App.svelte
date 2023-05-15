@@ -4,6 +4,7 @@
     AuthHeading,
     Bookmarks,
     CreateBookmark,
+    CreateService,
     Health,
     Services,
     UserMenu,
@@ -14,6 +15,7 @@
   import { onMount } from 'svelte'
   import { visible } from './store/CreateBookmark'
   import { userMenuVisible } from './store/UserMenu'
+  import { serviceFormVisible } from './store/CreateService'
   import { Color, ColorInput } from 'color-picker-svelte'
   import { get } from 'svelte/store'
   import { Button, P } from 'flowbite-svelte'
@@ -59,7 +61,7 @@
         </div>
       </UserMenu>
     {/if}
-    <Services />
+    <Services bgColour={useBookmarkBgColour} textColour={useTextColour} />
 
     <MenuButton />
     <div
@@ -68,6 +70,7 @@
     >
       <Bookmarks bgColour={useBookmarkBgColour} textColour={useTextColour} />
       <CreateBookmark visible={$visible} />
+      <CreateService serviceFormVisible={$serviceFormVisible}/>
     </div>
   {:else}
     <div
