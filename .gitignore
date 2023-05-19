@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 pocketbase
 pb_data
+.env
+.env.production
+upload.sh

@@ -1,6 +1,6 @@
 import PocketBase from 'pocketbase'
 import { get, writable } from 'svelte/store'
-import type { BookmarksRecord, FlagsRecord, ServicesRecord } from '../pocketbase-types'
+import type { BookmarksRecord, FlagsRecord, ServicesRecord, UsersRecord } from '../pocketbase-types'
 
 export const isError = (err: unknown): err is Error => err instanceof Error
 
@@ -9,7 +9,11 @@ interface healthCheckResponse {
     message: string
 }
 
-export let bookmarks = writable<BookmarksRecord[]>([])
+interface Bookmark extends BookmarksRecord {
+    id: string
+}
+
+export let bookmarks = writable<Bookmark[]>([])
 export let categories = writable<string[]>([])
 export let services = writable<ServicesRecord[]>([])
 export let username = writable<string>('')
@@ -17,7 +21,7 @@ export let password = writable<string>('')
 export let passwordConfirm = writable<string>('')
 export let health = writable<Partial<healthCheckResponse>>({})
 
-const pb = new PocketBase('http://127.0.0.1:8090')
+const pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL)
 
 const user = writable(pb.authStore.model)
 
@@ -26,6 +30,12 @@ export const usePocketBase = () => {
     pb.authStore.onChange(() => {
         user.set(pb.authStore.model)
     })
+
+    const clearUserAuth = () => {
+        username.set('')
+        password.set('')
+        passwordConfirm.set('')
+    }
 
     const getHealth = async () => {
         try {
@@ -38,11 +48,13 @@ export const usePocketBase = () => {
 
     const logout = () => {
         pb.authStore.clear()
+        clearUserAuth()
     }
 
     const login = async (callback: () => void) => {
         try {
             await pb.collection('users').authWithPassword(get(username), get(password))
+            clearUserAuth()
         } catch (error) {
             if (isError(error)) {
                 callback()
@@ -74,14 +86,26 @@ export const usePocketBase = () => {
 
     const getBookmarks = async () => {
         try {
-            const response = await pb.collection('bookmarks').getFullList<BookmarksRecord>()
+            const response = await pb.collection('bookmarks').getFullList<Bookmark>()
 
             bookmarks.set(response.sort((a, b) => a.value.localeCompare(b.value)))
+
+            categories.set([])
 
             response.forEach((bookmark) => {
                 if (get(categories).includes(bookmark.category)) return
                 categories.update((state) => [...state, bookmark.category])
             })
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(error)
+        }
+    }
+
+    const deleteBookmark = async (id: string) => {
+        try {
+            await pb.collection('bookmarks').delete(id)
+            await getBookmarks()
         } catch (error) {
             // eslint-disable-next-line no-console
             console.log(error)
@@ -100,6 +124,25 @@ export const usePocketBase = () => {
         }
     }
 
+    interface UserPreferencesProps {
+        bg: string
+        buttonBg: string
+        textColour: string
+    }
+
+    const setUserPreferences = async (props: UserPreferencesProps) => {
+        try {
+            await pb.collection('users').update<UsersRecord>(get(user).id, {
+                bgColour: props.bg,
+                buttonColour: props.buttonBg,
+                textColour: props.textColour,
+            })
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(error)
+        }
+    }
+
     return {
         pb,
         user,
@@ -109,6 +152,8 @@ export const usePocketBase = () => {
         refresh,
         canCreateAccounts,
         getBookmarks,
-        getServices
+        deleteBookmark,
+        getServices,
+        setUserPreferences
     }
 }

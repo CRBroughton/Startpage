@@ -28,7 +28,7 @@
 </script>
 
 {#if visible}
-  <div class="absolute bottom-6">
+  <div class="fixed bottom-6">
     <div class="flex flex-col md:flex-row gap-2">
       <Input bind:value={url} placeholder="URL" required />
       <Input bind:value={description} placeholder="Description" required />

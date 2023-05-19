@@ -14,9 +14,9 @@
   const createUser = async () => {
     if (!canCreateAccount) return
     await pb.collection('users').create({
-      username,
-      password,
-      passwordConfirm
+      username: $username,
+      password: $password,
+      passwordConfirm: $passwordConfirm
     })
     await login(() => trigger())
   }
